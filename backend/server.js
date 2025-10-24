@@ -136,9 +136,8 @@ app.get("/", (req, res) => {
       </table>
     </div>
 
-    <footer>© ${new Date().getFullYear()} ClockIt Attendance Tracker | Backend running on port ${
-    process.env.PORT || 4000
-  }</footer>
+    <footer>© ${new Date().getFullYear()} ClockIt Attendance Tracker | Backend running on port ${process.env.PORT || 4000
+    }</footer>
 
     <script>
       // subtle floating animation for fun
