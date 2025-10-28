@@ -1,18 +1,14 @@
-// controllers/userController.js
-// ============================================================
-// 👤 User Controller
-// Purpose:
 //   Manages profile fetching and password changing for logged-in users.
 //   Uses the same standardized response format as authController.js
 //   so frontend can easily show toast notifications.
-// ============================================================
+
 
 import pool from "../config/db.js";
 import bcrypt from "bcrypt";
 import { sendResponse } from "../utils/responseHandler.js"; // ✅ Toast helper
 
 // ============================================================
-// 📄 Fetch logged-in user's profile
+// Fetch logged-in user's profile
 // ============================================================
 export const getProfile = async (req, res) => {
   try {
@@ -30,7 +26,7 @@ export const getProfile = async (req, res) => {
 
     const user = rows[0];
 
-    // 🧠 Generate initials (for frontend)
+    // Generate initials (for frontend)
     const initials = user.name
       ? user.name
           .split(" ")
@@ -38,7 +34,7 @@ export const getProfile = async (req, res) => {
           .join("")
       : user.email.charAt(0).toUpperCase();
 
-    // ✅ Send structured response for frontend toast + data display
+    // Send structured response for frontend toast + data display
     return sendResponse(res, 200, true, "Profile fetched successfully.", {
       id: user.id,
       email: user.email,
@@ -52,7 +48,7 @@ export const getProfile = async (req, res) => {
 };
 
 // ============================================================
-// 🔒 Change password (only for logged-in users)
+// Change password (only for logged-in users)
 // ============================================================
 export const changePassword = async (req, res) => {
   try {

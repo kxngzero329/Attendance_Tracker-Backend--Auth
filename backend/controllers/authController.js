@@ -1,7 +1,6 @@
 // Handles registration, login (with lockout), forgot/reset password via email (primary or backup),
 // and manual account unlock.
 
-
 import pool from "../config/db.js";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
@@ -203,7 +202,7 @@ export const forgotPassword = async (req, res, next) => {
 
     await notifyUser(user.id, "Password Reset Requested", `Reset link sent to ${targetEmail}`);
 
-    return sendResponse(res, 200, true, "If that email exists, a reset link was sent.");
+    return sendResponse(res, 200, true, "Password reset link sent successfully.");
   } catch (err) {
     console.error("Forgot Password Error:", err);
     next(err);
@@ -250,7 +249,7 @@ export const resetPassword = async (req, res, next) => {
       [hashedNew, user.id]
     );
 
-    await notifyUser(user.id, "Password Reset", "Password reset successfully via email.");
+    await notifyUser(user.id, "Password Reset", "You have successfully reset your password.");
     return sendResponse(res, 200, true, "Password reset successful.");
   } catch (err) {
     console.error("Reset Password Error:", err);
