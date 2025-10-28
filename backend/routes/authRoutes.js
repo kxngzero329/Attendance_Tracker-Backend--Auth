@@ -11,8 +11,8 @@ const router = express.Router();
 
 router.post("/signup", registerUser);
 router.post("/login", loginUser);
-router.post("/forgot", forgotPassword);
-router.post("/reset", resetPassword);
-router.post("/unlock", unlockAccount);
+router.post("/forgot-password", forgotPassword);
+router.post("/reset-password", resetPassword);
+router.post("/unlock-account", unlockAccount);
 
 export default router;
