@@ -38,6 +38,8 @@ ALTER TABLE users ADD COLUMN backup_email VARCHAR(255) NULL;
 ALTER TABLE users
 ADD COLUMN role ENUM('admin', 'staff') DEFAULT 'staff';
 UPDATE users SET role = 'admin' WHERE email = 'suhairsmith17@gmail.com';
+ALTER TABLE notifications
+ADD COLUMN is_broadcast BOOLEAN DEFAULT FALSE;
 
 -- =========================================
 -- Indexes
