@@ -143,23 +143,34 @@ app.get("/", (req, res) => {
     <p>Backend Connected ⚡ Server running on <b>Node.js (Express + MySQL)</b></p>
 
     <div class="card">
-      <table>
-        <thead>
-          <tr>
-            <th>Method</th>
-            <th>Endpoint</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td class="method post">POST</td><td class="endpoint">/api/auth/signup</td><td>Register new user</td></tr>
-          <tr><td class="method post">POST</td><td class="endpoint">/api/auth/login</td><td>Login (JWT + lockout + reset)</td></tr>
-          <tr><td class="method post">POST</td><td class="endpoint">/api/auth/forgot-password</td><td>Request password reset email</td></tr>
-          <tr><td class="method post">POST</td><td class="endpoint">/api/auth/reset-password</td><td>Reset password via link</td></tr>
-          <tr><td class="method get">GET</td><td class="endpoint">/api/users/profile</td><td>Fetch logged-in user's profile</td></tr>
-          <tr><td class="method get">GET</td><td class="endpoint">/api/notifications</td><td>Fetch user's notifications</td></tr>
-        </tbody>
-      </table>
+     <table>
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>Endpoint</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- AUTH ROUTES -->
+    <tr><td class="method post">POST</td><td class="endpoint">/api/auth/signup</td><td>Register new user</td></tr>
+    <tr><td class="method post">POST</td><td class="endpoint">/api/auth/login</td><td>Login (JWT + lockout + reset)</td></tr>
+    <tr><td class="method post">POST</td><td class="endpoint">/api/auth/forgot-password</td><td>Request password reset email</td></tr>
+    <tr><td class="method post">POST</td><td class="endpoint">/api/auth/reset-password</td><td>Reset password via link</td></tr>
+    <tr><td class="method post">POST</td><td class="endpoint">/api/auth/unlock-account</td><td>Manually unlock locked account</td></tr>
+
+    <!-- USER ROUTES -->
+    <tr><td class="method get">GET</td><td class="endpoint">/api/users/profile</td><td>Fetch logged-in user's profile</td></tr>
+
+    <!-- NOTIFICATIONS -->
+    <tr><td class="method get">GET</td><td class="endpoint">/api/notifications</td><td>Fetch user's personal notifications</td></tr>
+
+    <!-- ADMIN ROUTES -->
+    <tr><td class="method post">POST</td><td class="endpoint">/api/admin/notify/all</td><td>Send broadcast message to all staff (Admin only)</td></tr>
+    <tr><td class="method post">POST</td><td class="endpoint">/api/admin/notify/user</td><td>Send message to a specific staff member (Admin only)</td></tr>
+  </tbody>
+</table>
+
     </div>
 
     <footer>© ${new Date().getFullYear()} ClockIt Attendance Tracker | Backend running on port ${process.env.PORT || 4000
