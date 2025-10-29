@@ -1,8 +1,6 @@
 //   Manages profile fetching and password changing for logged-in users.
 //   Uses the same standardized response format as authController.js
 //   so frontend can easily show toast notifications.
-
-
 import pool from "../config/db.js";
 import bcrypt from "bcrypt";
 import { sendResponse } from "../utils/responseHandler.js"; // ✅ Toast helper

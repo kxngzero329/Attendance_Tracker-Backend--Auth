@@ -23,6 +23,7 @@ const isStrongPassword = (password) => {
 };
 
 // JWT helper
+// set the period to 15 days when generating the token (demo purposes)
 const generateAccessToken = (user) =>
   jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET, {
     expiresIn: "15d",
@@ -74,7 +75,7 @@ export const registerUser = async (req, res, next) => {
 };
 
 // =============================================
-// LOGIN USER (with lockout)
+// LOGIN USER (with lockout after 3 failed attempts)
 // =============================================
 export const loginUser = async (req, res, next) => {
   try {
@@ -137,7 +138,7 @@ export const loginUser = async (req, res, next) => {
 };
 
 // =============================================
-// FORGOT PASSWORD (email only; support sending to backup email when provided)
+// FORGOT PASSWORD (email only; support sending to backup email when provided, on frontend its (try another way))
 // Endpoint: POST /api/auth/forgot
 // Body: { "email": "primary@example.com" } -> send to primary email
 // OR   { "email": "primary@example.com", "backupEmail": "backup@example.com" } -> send to backup email (must match stored backup_email)
@@ -175,7 +176,7 @@ export const forgotPassword = async (req, res, next) => {
       if (!user.backup_email || user.backup_email.toLowerCase() !== backupEmail.toLowerCase()) {
         // don't reveal details — return generic success message
         console.warn("Attempt to use mismatched backup email for user id:", user.id);
-        return sendResponse(res, 200, true, "If that email exists, a reset link was sent.");
+        return sendResponse(res, 200, true, "Password reset link sent to backup email successfully.");
       }
       targetEmail = user.backup_email;
     }
@@ -258,7 +259,7 @@ export const resetPassword = async (req, res, next) => {
 };
 
 // =============================================
-// UNLOCK ACCOUNT
+// UNLOCK ACCOUNT (optional, manual account unlock for security)
 // =============================================
 export const unlockAccount = async (req, res, next) => {
   try {
