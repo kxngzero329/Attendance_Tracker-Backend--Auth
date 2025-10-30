@@ -239,9 +239,21 @@ app.get("/", (req, res) => {
 }</pre>
         </div>
       </div>
+      <div class="accordion-item">
+        <div class="accordion-header">5️⃣ Reset Password</div>
+        <div class="accordion-content">
+          <p><code>POST /api/auth/reset-password</code></p>
+          <pre>{
+  "email": "email@gmail.com",
+  "token": "token from reset link goes here",
+  "newPassword": "NewPassword321!"
+}
+</pre>
+        </div>
+      </div>
 
       <div class="accordion-item">
-        <div class="accordion-header">5️⃣ Admin Broadcast Message</div>
+        <div class="accordion-header">6️⃣ Admin Broadcast Message</div>
         <div class="accordion-content">
           <p><code>POST /api/admin/notify/all</code></p>
           <pre>{
@@ -252,7 +264,7 @@ app.get("/", (req, res) => {
       </div>
 
       <div class="accordion-item">
-        <div class="accordion-header">6️⃣ Admin Personal Message</div>
+        <div class="accordion-header">7️⃣ Admin Personal Message</div>
         <div class="accordion-content">
           <p><code>POST /api/admin/notify/user</code></p>
           <pre>{
@@ -264,7 +276,7 @@ app.get("/", (req, res) => {
       </div>
 
       <div class="accordion-item">
-        <div class="accordion-header">7️⃣ Staff Notifications</div>
+        <div class="accordion-header">8️⃣ Staff Notifications</div>
         <div class="accordion-content">
           <p><code>GET /api/notifications</code> — Requires staff JWT token</p>
           <p>Shows any personal or broadcast messages sent by the admin.</p>
@@ -272,9 +284,8 @@ app.get("/", (req, res) => {
       </div>
     </div>
 
-    <footer>© ${new Date().getFullYear()} ClockIt Attendance Tracker | Backend running on port ${
-    process.env.PORT || 4000
-  }</footer>
+    <footer>© ${new Date().getFullYear()} ClockIt Attendance Tracker | Backend running on port ${process.env.PORT || 4000
+    }</footer>
 
     <script>
       document.querySelectorAll(".accordion-header").forEach(header => {

@@ -31,7 +31,7 @@ const generateAccessToken = (user) =>
 
 // =============================================
 // REGISTER USER
-// (unchanged except allow optional backup_email if frontend sends it)
+// ( allow optional backup_email if frontend sends it)
 // =============================================
 export const registerUser = async (req, res, next) => {
   try {
