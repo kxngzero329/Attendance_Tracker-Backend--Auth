@@ -43,8 +43,8 @@ app.get("/", (req, res) => {
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
-        overflow-x: hidden;
+        justify-content: flex-start;
+        padding: 40px 20px;
       }
 
       h1 {
@@ -52,7 +52,6 @@ app.get("/", (req, res) => {
         margin-bottom: 10px;
         text-align: center;
         color: #06C3A7;
-        animation: fadeInDown 1s ease forwards;
       }
 
       p {
@@ -60,17 +59,6 @@ app.get("/", (req, res) => {
         opacity: 0.9;
         margin-bottom: 30px;
         text-align: center;
-        animation: fadeIn 2s ease forwards;
-      }
-
-      @keyframes fadeInDown {
-        from { opacity: 0; transform: translateY(-20px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
-
-      @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
       }
 
       .card {
@@ -78,15 +66,9 @@ app.get("/", (req, res) => {
         border: 1px solid rgba(0,0,0,0.08);
         border-radius: 16px;
         padding: 24px;
-        max-width: 800px;
-        width: 90%;
+        max-width: 900px;
+        width: 100%;
         box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-        animation: popIn 1.3s ease forwards;
-      }
-
-      @keyframes popIn {
-        from { opacity: 0; transform: scale(0.95); }
-        to { opacity: 1; transform: scale(1); }
       }
 
       table {
@@ -116,9 +98,10 @@ app.get("/", (req, res) => {
       }
 
       footer {
-        margin-top: 30px;
+        margin-top: 40px;
         font-size: 0.8rem;
         opacity: 0.7;
+        text-align: center;
       }
 
       .endpoint {
@@ -136,53 +119,171 @@ app.get("/", (req, res) => {
       .post { color: #0EA5E9; }
       .put { color: #F59E0B; }
       .delete { color: #DC2626; }
+
+      .accordion {
+        background: #ffffff;
+        margin-top: 40px;
+        padding: 24px;
+        border-radius: 16px;
+        border: 1px solid rgba(0,0,0,0.08);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      }
+
+      .accordion-item {
+        margin-bottom: 10px;
+        border: 1px solid rgba(0,0,0,0.08);
+        border-radius: 10px;
+        overflow: hidden;
+      }
+
+      .accordion-header {
+        background-color: #06C3A7;
+        color: #fff;
+        padding: 12px 16px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: 0.3s;
+      }
+
+      .accordion-header:hover {
+        background-color: #0EA5E9;
+      }
+
+      .accordion-content {
+        display: none;
+        background: #fff;
+        padding: 16px;
+        border-top: 1px solid rgba(0,0,0,0.08);
+      }
+
+      .accordion-content pre {
+        background: rgba(6,195,167,0.08);
+        padding: 10px;
+        border-radius: 6px;
+        overflow-x: auto;
+      }
+
+      code {
+        background: rgba(6,195,167,0.08);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 0.9rem;
+      }
     </style>
   </head>
   <body>
     <h1>ClockIt Attendance Tracker API</h1>
-    <p>Backend Connected ⚡ Server running on <b>Node.js (Express + MySQL)</b></p>
+    <p>⚡ Backend Connected | Node.js + Express + MySQL</p>
 
     <div class="card">
-     <table>
-  <thead>
-    <tr>
-      <th>Method</th>
-      <th>Endpoint</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <!-- AUTH ROUTES -->
-    <tr><td class="method post">POST</td><td class="endpoint">/api/auth/signup</td><td>Register new user</td></tr>
-    <tr><td class="method post">POST</td><td class="endpoint">/api/auth/login</td><td>Login (JWT + lockout + reset)</td></tr>
-    <tr><td class="method post">POST</td><td class="endpoint">/api/auth/forgot-password</td><td>Request password reset email</td></tr>
-    <tr><td class="method post">POST</td><td class="endpoint">/api/auth/reset-password</td><td>Reset password via link</td></tr>
-    <tr><td class="method post">POST</td><td class="endpoint">/api/auth/unlock-account</td><td>Manually unlock locked account</td></tr>
-
-    <!-- USER ROUTES -->
-    <tr><td class="method get">GET</td><td class="endpoint">/api/users/profile</td><td>Fetch logged-in user's profile</td></tr>
-
-    <!-- NOTIFICATIONS -->
-    <tr><td class="method get">GET</td><td class="endpoint">/api/notifications</td><td>Fetch user's personal notifications</td></tr>
-
-    <!-- ADMIN ROUTES -->
-    <tr><td class="method post">POST</td><td class="endpoint">/api/admin/notify/all</td><td>Send broadcast message to all staff (Admin only)</td></tr>
-    <tr><td class="method post">POST</td><td class="endpoint">/api/admin/notify/user</td><td>Send message to a specific staff member (Admin only)</td></tr>
-  </tbody>
-</table>
-
+      <table>
+        <thead>
+          <tr>
+            <th>Method</th>
+            <th>Endpoint</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="method post">POST</td><td class="endpoint">/api/auth/signup</td><td>Register new user</td></tr>
+          <tr><td class="method post">POST</td><td class="endpoint">/api/auth/login</td><td>Login (JWT + lockout + reset)</td></tr>
+          <tr><td class="method post">POST</td><td class="endpoint">/api/auth/forgot-password</td><td>Request password reset email</td></tr>
+          <tr><td class="method post">POST</td><td class="endpoint">/api/auth/reset-password</td><td>Reset password via link</td></tr>
+          <tr><td class="method post">POST</td><td class="endpoint">/api/auth/unlock-account</td><td>Manually unlock locked account</td></tr>
+          <tr><td class="method get">GET</td><td class="endpoint">/api/users/profile</td><td>Fetch logged-in user's profile</td></tr>
+          <tr><td class="method get">GET</td><td class="endpoint">/api/notifications</td><td>Fetch user's personal notifications</td></tr>
+          <tr><td class="method post">POST</td><td class="endpoint">/api/admin/notify/all</td><td>Send broadcast message (Admin only)</td></tr>
+          <tr><td class="method post">POST</td><td class="endpoint">/api/admin/notify/user</td><td>Send message to specific staff (Admin only)</td></tr>
+        </tbody>
+      </table>
     </div>
 
-    <footer>© ${new Date().getFullYear()} ClockIt Attendance Tracker | Backend running on port ${process.env.PORT || 4000
-    }</footer>
+    <div class="accordion">
+      <h2 style="color:#06C3A7;margin-bottom:10px;">API Testing Guide (Thunder Client)</h2>
+
+      <div class="accordion-item">
+        <div class="accordion-header">1️⃣ Register a User</div>
+        <div class="accordion-content">
+          <p><code>POST /api/auth/signup</code></p>
+          <pre>{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "password": "Password123!",
+  "phone": "+27710001111"
+}</pre>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header">2️⃣ Login and Copy Token</div>
+        <div class="accordion-content">
+          <p><code>POST /api/auth/login</code></p>
+          <p>Response will include a <code>token</code>. Copy it to test protected routes.</p>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header">3️⃣ View Profile (Protected)</div>
+        <div class="accordion-content">
+          <p><code>GET /api/users/profile</code></p>
+          <p>Add header: <code>Authorization: Bearer &lt;your_token&gt;</code></p>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header">4️⃣ Forgot Password</div>
+        <div class="accordion-content">
+          <p><code>POST /api/auth/forgot-password</code></p>
+          <pre>{
+  "email": "john@example.com"
+}</pre>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header">5️⃣ Admin Broadcast Message</div>
+        <div class="accordion-content">
+          <p><code>POST /api/admin/notify/all</code></p>
+          <pre>{
+  "title": "System Update",
+  "message": "Server maintenance at 8PM tonight"
+}</pre>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header">6️⃣ Admin Personal Message</div>
+        <div class="accordion-content">
+          <p><code>POST /api/admin/notify/user</code></p>
+          <pre>{
+  "userId": 3,
+  "title": "Reminder",
+  "message": "Please submit your report today."
+}</pre>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header">7️⃣ Staff Notifications</div>
+        <div class="accordion-content">
+          <p><code>GET /api/notifications</code> — Requires staff JWT token</p>
+          <p>Shows any personal or broadcast messages sent by the admin.</p>
+        </div>
+      </div>
+    </div>
+
+    <footer>© ${new Date().getFullYear()} ClockIt Attendance Tracker | Backend running on port ${
+    process.env.PORT || 4000
+  }</footer>
 
     <script>
-      document.querySelectorAll('tr').forEach((row, i) => {
-        row.style.opacity = '0';
-        setTimeout(() => {
-          row.style.transition = 'opacity 0.5s ease';
-          row.style.opacity = '1';
-        }, 150 * i);
+      document.querySelectorAll(".accordion-header").forEach(header => {
+        header.addEventListener("click", () => {
+          const content = header.nextElementSibling;
+          const open = content.style.display === "block";
+          document.querySelectorAll(".accordion-content").forEach(c => c.style.display = "none");
+          content.style.display = open ? "none" : "block";
+        });
       });
     </script>
   </body>
@@ -196,7 +297,5 @@ app.use(errorHandler);
 // ======================== SERVER START ========================
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () =>
-  console.log(
-    `Backend Connected!! Server is running on http://localhost:${PORT}`
-  )
+  console.log(`Backend Connected!! Server is running on http://localhost:${PORT}`)
 );
