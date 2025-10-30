@@ -7,7 +7,7 @@ const router = express.Router();
 // Get logged-in user's profile (with initials)
 router.get("/profile", verifyToken, getProfile);
 
-// old route
+// old route, got changed to forgot-password
 // Change password (protected route) 
 // router.put("/change-password", verifyToken, changePassword);
 
