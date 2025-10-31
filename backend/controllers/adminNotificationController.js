@@ -3,7 +3,7 @@ import { notifyUser } from "../utils/notifyUser.js";
 import { sendResponse } from "../utils/responseHandler.js";
 
 /**
- * Send a notification to ALL staff members.
+ * Send a notification to ALL staff members (broadcast message).
  * Only admins can use this route.
  */
 export const broadcastNotification = async (req, res) => {
@@ -31,7 +31,7 @@ export const broadcastNotification = async (req, res) => {
 
 /**
  * Send a notification to a specific staff member.
- * Only admins can use this route.
+ * Only admins can use this route so if the user's role is not admin, it won't send the message.
  */
 export const personalNotification = async (req, res) => {
   const { userId, title, message } = req.body;

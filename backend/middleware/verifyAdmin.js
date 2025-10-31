@@ -10,7 +10,7 @@ export const verifyAdmin = async (req, res, next) => {
   try {
     const authHeader = req.headers.authorization;
 
-    // ✅ Ensure token exists
+    // Ensure token exists
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
       return sendResponse(res, 401, false, "No token provided");
     }
@@ -18,7 +18,7 @@ export const verifyAdmin = async (req, res, next) => {
     const token = authHeader.split(" ")[1];
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    // ✅ Get user and verify role
+    // Get user and verify role
     const [rows] = await pool.query("SELECT id, role FROM users WHERE id = ?", [decoded.id]);
     const user = rows[0];
 

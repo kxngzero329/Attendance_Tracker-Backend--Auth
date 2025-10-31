@@ -2,8 +2,8 @@
 //   backend endpoints (Auth + User + future routes).
 //   Every response includes:
 //     - success: Boolean (true/false)
-//     - message: Human-readable string
-//     - data: Optional object with extra payload
+//     - message: short string
+//     - data: object with extra payload
 
 export const sendResponse = (res, statusCode, success, message, data = null) => {
     // Build consistent JSON structure
